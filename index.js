@@ -1,18 +1,10 @@
 var express = require('express')
 var app = express()
 var pool = require('./queries.js')
-var things = require('./things.js')
 
-app.use('/things', things)
+var query = require('./query.js')
 
-app.get('/actor', function(req, res){
-    pool.query('Select * From actor', (err, result) => {
-        if (err) {
-            throw err
-        }
-        res.send(result.rows)
-    })
-})
+app.use('/query', query)
 
 pool.connect((err, res) => {
     console.log(err)
