@@ -5,8 +5,13 @@ var things = require('./things.js')
 
 app.use('/things', things)
 
-app.get('/', function(req, res){
-    res.send("Tes")
+app.get('/actor', function(req, res){
+    pool.query('Select * From actor', (err, result) => {
+        if (err) {
+            throw err
+        }
+        res.send(result.rows)
+    })
 })
 
 pool.connect((err, res) => {
