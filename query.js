@@ -11,6 +11,15 @@ router.get('/actor', function(req, res){
     })
 })
 
+router.get('/film', function(req, res){
+    pool.query('Select * From film', (err, result) => {
+        if (err) {
+            throw err
+        }
+        res.send(result.rows)
+    })
+})
+
 router.get('/film/:id', function(req, res){
     const film_id = req.params.id
     pool.query('Select * From film WHERE film_id = $1', [film_id], (err, result) => {
